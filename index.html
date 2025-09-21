@@ -15,6 +15,8 @@
 
     header {
       padding: 80px 20px;
+      z-index: 5;
+      position: relative;
     }
 
     header h1 {
@@ -53,6 +55,27 @@
       0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
       100% { transform: translateY(-150px) rotate(360deg); opacity: 0; }
     }
+
+    /* Flor central animada */
+    .central-flower {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      height: auto;
+      z-index: 10;
+      pointer-events: none;
+      animation: floatPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes floatPulse {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      25% { transform: translate(-50%, -52%) scale(1.05); }
+      50% { transform: translate(-50%, -50%) scale(1); }
+      75% { transform: translate(-50%, -48%) scale(1.05); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
   </style>
 </head>
 <body>
@@ -61,10 +84,13 @@
     <p>"Aunque estemos lejos, cada flor amarilla te lleva un pedacito de mi corazón"</p>
   </header>
 
-  <!-- Flores animadas desde el repositorio -->
-  <img src="IMG_1438.png" class="flower" style="left: 10%; animation-duration: 12s;">
-  <img src="IMG_1439.jpeg" class="flower" style="left: 40%; animation-duration: 15s;">
-  <img src="IMG_1438.png" class="flower" style="left: 70%; animation-duration: 18s;">
-  <img src="IMG_1439.jpeg" class="flower" style="left: 85%; animation-duration: 14s;">
+  <!-- Flor central animada -->
+  <img src="images/flor_central.png" class="central-flower">
+
+  <!-- Flores animadas flotando -->
+  <img src="images/flor1.png" class="flower" style="left: 10%; animation-duration: 12s;">
+  <img src="images/flor2.png" class="flower" style="left: 40%; animation-duration: 15s;">
+  <img src="images/flor1.png" class="flower" style="left: 70%; animation-duration: 18s;">
+  <img src="images/flor2.png" class="flower" style="left: 85%; animation-duration: 14s;">
 </body>
 </html>
