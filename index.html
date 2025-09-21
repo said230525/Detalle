@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Mi Mocosa</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #fff8e1;
+      overflow: hidden;
+      text-align: center;
+      height: 100vh;
+    }
+
+    header {
+      padding: 80px 20px;
+    }
+
+    header h1 {
+      font-size: 3em;
+      color: #f4c430;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    header p {
+      font-size: 1.5em;
+      color: #ffb84d;
+      font-style: italic;
+      animation: floatText 3s infinite alternate;
+    }
+
+    /* Animación de pulso del título */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Animación de flotación del texto */
+    @keyframes floatText {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-15px); }
+    }
+
+    /* Animación de flores */
+    .flower {
+      position: absolute;
+      width: 80px;
+      height: auto;
+      animation: floatFlowers linear infinite;
+    }
+
+    @keyframes floatFlowers {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-150px) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌼 Para Mi Mocosa 🌼</h1>
+    <p>"Aunque estemos lejos, cada flor amarilla te lleva un pedacito de mi corazón"</p>
+  </header>
+
+  <!-- Flores animadas -->
+  <img src="https://i.imgur.com/7bXcWgJ.png" class="flower" style="left: 10%; animation-duration: 12s;">
+  <img src="https://i.imgur.com/hG4xVrk.png" class="flower" style="left: 40%; animation-duration: 15s;">
+  <img src="https://i.imgur.com/7bXcWgJ.png" class="flower" style="left: 70%; animation-duration: 18s;">
+  <img src="https://i.imgur.com/hG4xVrk.png" class="flower" style="left: 85%; animation-duration: 14s;">
+</body>
+</html>
