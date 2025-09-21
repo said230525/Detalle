@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Para Mi Mocosa</title>
   <style>
     body {
@@ -20,17 +21,20 @@
     }
 
     header h1 {
-      font-size: 3em;
+      font-size: 5em;
       color: #f4c430;
       margin-bottom: 20px;
       animation: pulse 2s infinite;
     }
 
     header p {
-      font-size: 1.5em;
+      font-size: 2em;
       color: #ffb84d;
       font-style: italic;
+      line-height: 1.4;
       animation: floatText 3s infinite alternate;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     @keyframes pulse {
@@ -46,7 +50,7 @@
 
     .flower {
       position: absolute;
-      width: 80px;
+      width: 120px;
       height: auto;
       animation: floatFlowers linear infinite;
     }
@@ -56,25 +60,65 @@
       100% { transform: translateY(-150px) rotate(360deg); opacity: 0; }
     }
 
-    /* Flor central animada */
     .central-flower {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 250px;
+      width: 300px;
       height: auto;
       z-index: 10;
       pointer-events: none;
-      animation: floatPulse 3s ease-in-out infinite;
+      animation: magicFloat 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px #f4c430);
     }
 
-    @keyframes floatPulse {
-      0% { transform: translate(-50%, -50%) scale(1); }
-      25% { transform: translate(-50%, -52%) scale(1.05); }
-      50% { transform: translate(-50%, -50%) scale(1); }
-      75% { transform: translate(-50%, -48%) scale(1.05); }
-      100% { transform: translate(-50%, -50%) scale(1); }
+    @keyframes magicFloat {
+      0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); filter: drop-shadow(0 0 10px #f4c430); }
+      25% { transform: translate(-50%, -52%) scale(1.05) rotate(2deg); filter: drop-shadow(0 0 25px #ffe066); }
+      50% { transform: translate(-50%, -50%) scale(1) rotate(0deg); filter: drop-shadow(0 0 10px #f4c430); }
+      75% { transform: translate(-50%, -48%) scale(1.05) rotate(-2deg); filter: drop-shadow(0 0 25px #ffe066); }
+      100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); filter: drop-shadow(0 0 10px #f4c430); }
+    }
+
+    /* Partículas corazón que laten */
+    .particle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: #ffe066;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: sparkle linear infinite, heartbeat 2s infinite;
+    }
+
+    @keyframes sparkle {
+      0% { transform: translate(0,0) scale(1); opacity: 0.8; }
+      50% { transform: translate(var(--x), var(--y)) scale(1.5); opacity: 0.4; }
+      100% { transform: translate(0,0) scale(1); opacity: 0.8; }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.2); }
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 3em; }
+      header p { font-size: 1.2em; max-width: 90%; }
+      .central-flower { width: 200px; }
+      .flower { width: 80px; }
+      .particle { width: 4px; height: 4px; }
+    }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 2.2em; }
+      header p { font-size: 1em; }
+      .central-flower { width: 150px; }
+      .flower { width: 50px; }
+      .particle { width: 3px; height: 3px; }
     }
   </style>
 </head>
@@ -87,13 +131,31 @@ y su brillo te recuerde que siempre pienso en ti,
 mi mocosa, mi alegría, mi sol en la distancia."</p>
   </header>
 
-  <!-- Flor central animada -->
   <img src="IMG_1440.jpeg" class="central-flower">
 
-  <!-- Flores animadas flotando -->
   <img src="IMG_1439.jpeg" class="flower" style="left: 10%; animation-duration: 12s;">
   <img src="IMG_1438.png" class="flower" style="left: 40%; animation-duration: 15s;">
   <img src="IMG_1439.jpeg" class="flower" style="left: 70%; animation-duration: 18s;">
   <img src="IMG_1438.png" class="flower" style="left: 85%; animation-duration: 14s;">
+
+  <script>
+    const numParticles = 50;
+    const centerX = window.innerWidth/2;
+    const centerY = window.innerHeight/2;
+
+    for(let i=0;i<numParticles;i++){
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      const t = Math.random()*Math.PI*2;
+      const r = 150 * Math.sqrt(Math.random());
+      // ecuación paramétrica corazón
+      const x = r * 16 * Math.pow(Math.sin(t),3);
+      const y = -r * (13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t));
+      p.style.setProperty('--x', x+'px');
+      p.style.setProperty('--y', y+'px');
+      p.style.animationDuration = (2 + Math.random()*2)+'s';
+      document.body.appendChild(p);
+    }
+  </script>
 </body>
 </html>
